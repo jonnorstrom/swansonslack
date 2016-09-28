@@ -5,7 +5,7 @@ require 'uri'
 require_relative 'quotes'
 
 post '/swanson' do
-  "hey ya'll"
+  get_quote
   # send_quote_to_slack(params[:response_url], get_quote)
 end
 
