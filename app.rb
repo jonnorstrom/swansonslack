@@ -25,10 +25,7 @@ def format_body(quote)
     "attachments": [
        {
          "fallback": "#{quote}",
-         "text": "#{quote}",
-         "mrkdwn_in": [
-             "text",
-         ]
+         "text": "#{quote}"
        }
      ]
    }.to_json
