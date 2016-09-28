@@ -10,9 +10,9 @@ end
 
 def send_quote_to_slack(response_url, quote)
   uri = URI(response_url)
-  req = Net::HTTP::Post.new(uri)
+  req = Net::HTTP::Post.new(uri, {'Content-Type' =>'application/json'})
 
-  req.body = quote
+  req.body = format_body(quote)
 
   Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
     http.request(req)
@@ -23,11 +23,5 @@ def format_body(quote)
   {
     "response_type": "in_channel",
     "text": "#{quote}"
-    "attachments": [
-       {
-         "fallback": "#{quote}",
-         "text": "#{quote}"
-       }
-     ]
-   }.to_json
+  }.to_json
 end
