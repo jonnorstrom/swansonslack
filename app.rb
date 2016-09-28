@@ -5,7 +5,17 @@ require 'uri'
 require_relative 'quotes'
 
 post '/swanson' do
-  send_quote_to_slack(params[:response_url], get_quote)
+  quote = get_quote
+  {
+    "response_type": "in_channel",
+    "attachments": [
+       {
+         "fallback": "#{quote}",
+         "text": "#{quote}"
+       }
+     ]
+   }.to_json
+  # send_quote_to_slack(params[:response_url], get_quote)
 end
 
 def send_quote_to_slack(response_url, quote)
